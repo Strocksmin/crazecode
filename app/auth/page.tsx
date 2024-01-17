@@ -8,16 +8,15 @@ type AuthPageProps = {
     
 };
 
-
 const AuthPage:React.FC<AuthPageProps> = () => {
     const [isClass, setIsClass] = useState(false);
 
 const clickHandler = () => {
-    setIsClass(CurrentStatus => !CurrentStatus);
-    
+    setIsClass(CurrentStatus => { return !CurrentStatus});
 }
     
     return (
+        <div className="auth-body">
         <div className={isClass ? "container active" : 'container'} id="container">
         <div className="form-container sign-up">
             <form>
@@ -60,7 +59,7 @@ const clickHandler = () => {
             </div>
         </div>
     </div>
-    
+    </div>
     );
 }
 
