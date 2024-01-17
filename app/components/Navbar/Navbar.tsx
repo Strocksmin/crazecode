@@ -10,14 +10,14 @@ const navbar:React.FC<navbarProps> = () => {
         <header className='header'>
             <div className='content'>
                 <div className='header-logo'>
-                    <a href="https://freecodecamp.org" className="logo">
-                        <img src="https://s3.amazonaws.com/freecodecamp/freecodecamp_logo.svg" alt="freeCodeCamp logo"/>
+                    <a href="/" className="logoRef">
+                        <img className="logo" src="https://i.postimg.cc/sDdJxVbb/logo-Craze-Code.png" alt="CrazeCode"/>
                     </a>
                 </div>
                 <div className='menu'>
                     <nav className="navbar">
                         <div className="nav-links">
-                            <a className="nav-item" href="#"><span>Задачи</span></a>
+                            <a className="nav-item" href="/problems"><span>Задачи</span></a>
                             <a className="nav-item" href="#"><span>Блог</span></a>
                             <a className="nav-item" href="#"><span>Справочник</span></a>
                         </div>

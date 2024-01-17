@@ -273,23 +273,28 @@ body {
     color: white;
 }
 
-.logo {
+.logoRef {
     align-content: center;
     display: block;
+}
+
+.logo {
+    width:168px;
+    height: 32px;
 }
 
 .header {
     top:0;
     left: 0;
     right: 0;
-    background: #00a8e8;
-    padding: 10px;
-    border-bottom: 2px solid #003459;
+    background: #fff;
+    border-bottom: 1px rgba(168, 186, 217, 0.4) solid;
+    box-shadow: 1px 0 2px rgba(0,0,0,.231);
 }
 
 .content {
     display: flex;
-    padding: 0 40px;
+    padding: 0 140px;
 }
 
 .header-logo {

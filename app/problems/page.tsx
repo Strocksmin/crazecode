@@ -10,7 +10,7 @@ const ProblemsPage:React.FC<ProblemsPageProps> = () => {
     return (
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'stretch', width: '100%'}}>
         <Navbar></Navbar>
-        <div style={{flexGrow: '1'}}>Body</div>
+        <div style={{}}>Body</div>
         <div style={{}}>Footer</div>
         </div>
     )
