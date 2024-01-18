@@ -341,3 +341,69 @@ body {
     transition: .2s ease;
     padding: 23px 25px 21px;
 }
+
+.problems-table {
+    width: 100%;
+    background-color: white;
+}
+
+.start-table {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px;
+    background-color: #008ab8;
+    border-bottom: 2px rgb(110, 110, 110) solid;
+}
+
+.start-table-title {
+    padding: 0 100px;
+}
+
+.start-two {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.start-last {
+    display: flex;
+    justify-content: space-between;
+}
+
+.start-last2 {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 85px;
+}
+
+.start-last div {
+    padding: 0 20px;
+}
+
+.start-last2 div {
+    padding: 0 20px;
+}
+
+.content-table {
+    
+}
+
+.problem {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px;
+}
+
+.problem:nth-child(2n) {
+    background-color: #008ab8;
+}
+
+.problem-start-two {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.problem-start-table-title {
+    padding: 0 90px;
+}
