@@ -343,7 +343,8 @@ body {
 }
 
 .problems-table {
-    width: 100%;
+    margin: 50px auto 0 auto;
+    width: 70%;
     background-color: white;
 }
 
@@ -351,7 +352,7 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 10px 10px;
-    background-color: #008ab8;
+    background-color: #00a8e8;
     border-bottom: 2px rgb(110, 110, 110) solid;
 }
 
@@ -395,7 +396,7 @@ body {
 }
 
 .problem:nth-child(2n) {
-    background-color: #008ab8;
+    background-color: #00a8e8;
 }
 
 .problem-start-two {

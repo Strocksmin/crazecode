@@ -1,14 +1,35 @@
 "use client"
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Problem from './Problem';
+import Pagination from '../Pagination/Pagination';
 
 type ProblemsTableProps = {
     
 };
 
+const pageSize = 10;
+
 const ProblemsTable:React.FC<ProblemsTableProps> = () => {
+    const [currentPage, setCurrentPage] = useState(1);
+
     const [problems, setProblems] = useState([
+        {status: 'Решено', title: 'Two sum', 
+        solve: 'Решение', complexity:  1},
+        {status: 'Решено', title: 'Unique Number of Occurrences', 
+        solve: 'Решение', complexity:  1},
+        {status: 'Решено', title: 'FizzBuzz', 
+        solve: 'Решение', complexity:  1},
+        {status: 'Решено', title: 'Find Beautiful Indices in the Given Array II', 
+        solve: 'Решение', complexity:  3},
+        {status: 'Решено', title: 'Two sum', 
+        solve: 'Решение', complexity:  1},
+        {status: 'Решено', title: 'Unique Number of Occurrences', 
+        solve: 'Решение', complexity:  1},
+        {status: 'Решено', title: 'FizzBuzz', 
+        solve: 'Решение', complexity:  1},
+        {status: 'Решено', title: 'Find Beautiful Indices in the Given Array II', 
+        solve: 'Решение', complexity:  3},
         {status: 'Решено', title: 'Two sum', 
         solve: 'Решение', complexity:  1},
         {status: 'Решено', title: 'Unique Number of Occurrences', 
@@ -18,6 +39,12 @@ const ProblemsTable:React.FC<ProblemsTableProps> = () => {
         {status: 'Решено', title: 'Find Beautiful Indices in the Given Array II', 
         solve: 'Решение', complexity:  3}
     ]);
+
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * pageSize;
+    const lastPageIndex = firstPageIndex + pageSize;
+    return problems.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage]);
 
     return (
         <div className='problems-table'>
@@ -32,11 +59,19 @@ const ProblemsTable:React.FC<ProblemsTableProps> = () => {
                 </div>
             </div>
             <div className='content-table'>
-                {problems.map((problem) => (
+                {currentTableData.map((problem) => (
                     <Problem {...problem} />
                 ))}
             </div>
+            <Pagination
+        className="pagination-bar"
+        currentPage={currentPage}
+        totalCount={problems.length}
+        pageSize={pageSize}
+        onPageChange={page => setCurrentPage(page)}
+      />
         </div>
+        
     )
 }
 export default ProblemsTable;
