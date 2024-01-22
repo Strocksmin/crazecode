@@ -50,12 +50,10 @@ h1 {
 }
 
 body {
-    background-color: #c9d6ff;
-    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
     display: flex;
-    align-items: center;
     flex-direction: column;
     height: 100vh;
+    flex: 1 0 auto;
 }
 
 .container{
@@ -284,12 +282,12 @@ body {
 }
 
 .header {
+    flex: 0 0 auto;
     top:0;
     left: 0;
     right: 0;
     background: #fff;
-    border-bottom: 1px rgba(168, 186, 217, 0.4) solid;
-    box-shadow: 1px 0 2px rgba(0,0,0,.231);
+    box-shadow: 1px 0 2px rgba(0,0,0,.5);
 }
 
 .content {
@@ -407,4 +405,57 @@ body {
 
 .problem-start-table-title {
     padding: 0 90px;
+}
+
+.footer {
+    flex: 0 0 auto;
+    background: #fff;
+    width: 100%;
+    border-top: 1px rgba(0, 0, 0, 0.2) solid;
+    box-shadow: 0 8px 14px rgba(33, 33, 33, .5);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 30px 24px;
+    align-items: center;
+}
+
+.social {
+    display: flex;
+    color: #333;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.social-list {
+    display: flex;
+    column-gap: 16px;
+}
+
+.social-list a {
+    display: flex;
+    align-items: center;
+    color: black;
+    text-decoration: none;
+}
+
+.social-list a svg {
+    width: 24px;
+    height: 24px;
+}
+
+.social-list a span {
+margin-left: 10px;
+}
+
+html {
+    height: 100%;
+}
+
+main {
+    flex: 1 0 auto;
 }

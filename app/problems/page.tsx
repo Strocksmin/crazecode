@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import ProblemsTable from '../components/Problems/ProblemsTable';
+import Footer from '../components/Footer/Footer';
 
 type ProblemsPageProps = {
     
@@ -9,11 +10,13 @@ type ProblemsPageProps = {
 const ProblemsPage:React.FC<ProblemsPageProps> = () => {
     
     return (
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'stretch', width: '100%'}}>
+        <>
         <Navbar></Navbar>
+        <main>
         <ProblemsTable />
-        <div style={{}}>Footer</div>
-        </div>
+        </main>
+        <Footer />
+        </>
     )
 }
 export default ProblemsPage;

@@ -1,7 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
-import Problem from '../components/Problems/Problem';
-import ProblemsTable from '../components/Problems/ProblemsTable';
+import Footer from '../components/Footer/Footer';
 
 type TestPageProps = {
     
@@ -9,7 +7,7 @@ type TestPageProps = {
 
 const TestPage:React.FC<TestPageProps> = () => {    
     return (
-        <ProblemsTable />
+        <Footer />
     )
 }
 export default TestPage;
