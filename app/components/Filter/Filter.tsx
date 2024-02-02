@@ -4,9 +4,11 @@ import React, { useState } from 'react';
 import FilterButton from './FilterButton';
 
 type FilterProps = {
-    onFilterChange: (currentFilter: string) => void;
-    title: string;
-    content: string[];
+    onFilterChange: (currentFilter: string) => void,
+    title: string,
+    content: string[],
+    filters: number[],
+    onSetFilterArray: (filtersArray: number[]) => void;
 };
 
 let list: number[] = [];
@@ -15,7 +17,9 @@ const Filter:React.FC<FilterProps> = (props) => {
     const {
         title,
         content,
-        onFilterChange
+        onFilterChange,
+        filters,
+        onSetFilterArray
     } = props;
 
 
@@ -44,17 +48,14 @@ const Filter:React.FC<FilterProps> = (props) => {
 
     const filterClickHandler = (filter: string, i:number) => {
         if (!list.includes(i)) {
-            list.push(i)
+            list.push(i);
+            onSetFilterArray(list);
         }
         else {
             list.splice(list.indexOf(i), 1);
+            onSetFilterArray(list);
         }
-        console.log(i)
-        console.log(list)
         setFilter(isFiltered => {return !isFiltered})
-        console.log("Кнопка поменяла цвет");
-        console.log("____");
-        console.log(selected);
     }
 
     return (

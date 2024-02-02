@@ -6,6 +6,7 @@ import Pagination from '../Pagination/Pagination';
 import FilterMenu from '../Filter/FilterMenu';
 
 type ProblemsTableProps = {
+    
 };
 
 const pageSize = 10;
@@ -41,6 +42,9 @@ const ProblemsTable:React.FC<ProblemsTableProps> = () => {
         {status: 'Решено', title: 'Find Beautiful Indices in the Given Array II', 
         solve: 'Решение', complexity:  3}
     ]);
+    let list: number[] = [];
+
+    const [filterArray, setFilterArray] = useState(list);
 
     const filteredData = currentFilter != "" ? problems.filter((problem) => {
             return problem.title === currentFilter;
@@ -53,10 +57,15 @@ const ProblemsTable:React.FC<ProblemsTableProps> = () => {
     return problems.slice(firstPageIndex, lastPageIndex);}, [currentPage]);
 
     console.log(problems.filter((problem) => problem.title === currentFilter));
+    console.log("Массив фильров - " + filterArray);
 
     return (
         <>
-            <FilterMenu onFilterChange={currentFilter => setCurrentFilter(currentFilter)} />
+            <FilterMenu 
+                onFilterChange={currentFilter => setCurrentFilter(currentFilter)} 
+                filtersArray={filterArray}
+                onSetFilterArray={filterArray => setFilterArray(filterArray)}
+            />
             <div className='problems-table'>
                 <div className='start-table'>
                     <div className='start-two'>
@@ -78,7 +87,8 @@ const ProblemsTable:React.FC<ProblemsTableProps> = () => {
             currentPage={currentPage}
             totalCount={problems.length}
             pageSize={pageSize}
-            onPageChange={page => setCurrentPage(page)} />
+            onPageChange={page => setCurrentPage(page)}
+            />
             </div>
         </>
     )
