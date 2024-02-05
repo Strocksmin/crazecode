@@ -1,6 +1,5 @@
 "use client"
-import Link from 'next/link';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Problem from './Problem';
 import Pagination from '../Pagination/Pagination';
 import FilterMenu from '../Filter/FilterMenu';
@@ -77,15 +76,6 @@ const ProblemsTable:React.FC<ProblemsTableProps> = () => {
             ]
         },
         {
-            title: "Список",
-            content: [
-                "Список 1", "Список 2", "Список 3"
-            ],
-            state: [
-
-            ]
-        },
-        {
             title: "Тема",
             content: [
                 "set", "array", "hashmap"
@@ -96,12 +86,17 @@ const ProblemsTable:React.FC<ProblemsTableProps> = () => {
         },
     ];
 
+    const [searchTerm, setSearchTerm] = useState("");
+
     const [filterArray, setFilterArray] = useState(list);
 
-    const filteredData = problems.filter((problem) => {
+    const searchResults = !searchTerm ? problems : problems.filter(
+        (problem) => problem.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    const filteredData = searchResults.filter((problem) => {
         return filterArray.every((tag) => problem.tags.includes(tag))
     });
-
 
     const currentTableData = () => {
     const firstPageIndex = (currentPage - 1) * pageSize;
@@ -115,6 +110,8 @@ const ProblemsTable:React.FC<ProblemsTableProps> = () => {
                 filtersArray={filterArray}
                 onSetFilterArray={filterArray => setFilterArray(filterArray)}
                 filterStructure={filterStructure}
+                searchTerm={searchTerm}
+                onSetSearchTerm={searchTerm => setSearchTerm(searchTerm)}
             />
              <div className='tags'>
         {filterArray.length > 0
@@ -150,7 +147,7 @@ const ProblemsTable:React.FC<ProblemsTableProps> = () => {
                 <Pagination
             className="pagination-bar"
             currentPage={currentPage}
-            totalCount={problems.length}
+            totalCount={filteredData.length}
             pageSize={pageSize}
             onPageChange={page => setCurrentPage(page)}
             />
