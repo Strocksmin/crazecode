@@ -7,11 +7,9 @@ type FilterProps = {
     onFilterChange: (currentFilter: string) => void,
     title: string,
     content: string[],
-    filters: number[],
-    onSetFilterArray: (filtersArray: number[]) => void;
+    filters: string[],
+    onSetFilterArray: (filtersArray: string[]) => void;
 };
-
-let list: number[] = [];
 
 const Filter:React.FC<FilterProps> = (props) => {
     const {
@@ -19,9 +17,8 @@ const Filter:React.FC<FilterProps> = (props) => {
         content,
         onFilterChange,
         filters,
-        onSetFilterArray
+        onSetFilterArray,
     } = props;
-
 
     const [isActive, setActive] = useState(false);
 
@@ -36,9 +33,9 @@ const Filter:React.FC<FilterProps> = (props) => {
     let defFilter:number = 0;
 
 
-    function toggleStyle(index: number) {
-        const i: number = index;
-        if (list.includes(i)) {
+    function toggleStyle(obj: string) {
+        const i:string = obj;
+        if (filters.includes(i)) {
             return true;
         }
         else {
@@ -47,15 +44,13 @@ const Filter:React.FC<FilterProps> = (props) => {
     }
 
     const filterClickHandler = (filter: string, i:number) => {
-        if (!list.includes(i)) {
-            list.push(i);
-            onSetFilterArray(list);
+        if (!filters.includes(filter)) {
+            onSetFilterArray([...filters, filter]);
         }
         else {
-            list.splice(list.indexOf(i), 1);
-            onSetFilterArray(list);
+            onSetFilterArray(filters.filter((obj) => obj !== filter))
         }
-        setFilter(isFiltered => {return !isFiltered})
+        onFilterChange(filter)
     }
 
     return (
@@ -72,7 +67,7 @@ const Filter:React.FC<FilterProps> = (props) => {
                         <FilterButton text={f}
                         key={index}
                         onClick={() => filterClickHandler(f, index)}
-                        selected={toggleStyle(index)}
+                        selected={toggleStyle(f)}
                         >
                             {f}
                         </FilterButton>

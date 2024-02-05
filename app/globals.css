@@ -535,3 +535,17 @@ main {
     border: none;
     cursor: pointer;
 }
+
+.close {
+    border: none;
+    padding: 10px;
+    background-color: #cfeed6;
+    margin: 0 10px;
+}
+
+.tags {
+    width: 70%;
+    margin: 15px auto 0 auto;
+    display: flex;
+    justify-content: flex-start;
+}

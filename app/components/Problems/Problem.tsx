@@ -4,10 +4,10 @@ type ProblemProps = {
     status:string,
     title:string,
     solve:string,
-    complexity:number
+    complexity:number,
 };
 
-const Problem:React.FC<ProblemProps> = ({status, title, solve, complexity}) => {
+const Problem:React.FC<ProblemProps> = ({status, title, solve, complexity}, filtered) => {
     
     return (
         <div className='problem'>

@@ -8,20 +8,42 @@ import FilterMenu from '../Filter/FilterMenu';
 type ProblemsTableProps = {
     
 };
-
-const pageSize = 10;
+let list: string[] = [];
+const pageSize = 5;
 
 const ProblemsTable:React.FC<ProblemsTableProps> = () => {
     const [currentPage, setCurrentPage] = useState(1);
 
-    const [currentFilter, setCurrentFilter] = useState("");
+    const [isTaged, setTaged] = useState(false);
 
+    const [currentFilter, setCurrentFilter] = useState("");
+    
     const [problems, setProblems] = useState([
         {status: 'Решено', title: 'Two sum', 
-        solve: 'Решение', complexity:  1},
+        solve: 'Решение', complexity:  1, tags: [
+            'array',
+            'hashmap',],
+        },
         {status: 'Решено', title: 'Unique Number of Occurrences', 
-        solve: 'Решение', complexity:  1},
+        solve: 'Решение', complexity:  1, tags: [
+            'array',
+            'set',],},
         {status: 'Решено', title: 'FizzBuzz', 
+        solve: 'Решение', complexity:  1,tags: [
+            'array',],},
+        {status: 'Решено', title: 'Find Beautiful Indices in the Given Array II', 
+        solve: 'Решение', complexity:  3,tags: [
+            'array',
+            'hashmap',],},
+        {status: 'Решено', title: 'Two sum', 
+        solve: 'Решение', complexity:  1, tags: [
+            'array',
+            'hashmap',],},
+        {status: 'Решено', title: 'Unique Number of Occurrences', 
+        solve: 'Решение', complexity:  1, tags: [
+            'array',
+            'set',],},
+        /*{status: 'Решено', title: 'FizzBuzz', 
         solve: 'Решение', complexity:  1},
         {status: 'Решено', title: 'Find Beautiful Indices in the Given Array II', 
         solve: 'Решение', complexity:  3},
@@ -32,32 +54,59 @@ const ProblemsTable:React.FC<ProblemsTableProps> = () => {
         {status: 'Решено', title: 'FizzBuzz', 
         solve: 'Решение', complexity:  1},
         {status: 'Решено', title: 'Find Beautiful Indices in the Given Array II', 
-        solve: 'Решение', complexity:  3},
-        {status: 'Решено', title: 'Two sum', 
-        solve: 'Решение', complexity:  1},
-        {status: 'Решено', title: 'Unique Number of Occurrences', 
-        solve: 'Решение', complexity:  1},
-        {status: 'Решено', title: 'FizzBuzz', 
-        solve: 'Решение', complexity:  1},
-        {status: 'Решено', title: 'Find Beautiful Indices in the Given Array II', 
-        solve: 'Решение', complexity:  3}
+        solve: 'Решение', complexity:  3}*/
     ]);
-    let list: number[] = [];
+
+    const filterStructure = [
+        {
+            title: "Сложность",
+            content: [
+                "Легко", "Нормально", "Сложно"
+            ],
+            state: [
+
+            ]
+        },
+        {
+            title: "Статус",
+            content: [
+                "Выполнено", "Не выполнено"
+            ],
+            state: [
+
+            ]
+        },
+        {
+            title: "Список",
+            content: [
+                "Список 1", "Список 2", "Список 3"
+            ],
+            state: [
+
+            ]
+        },
+        {
+            title: "Тема",
+            content: [
+                "set", "array", "hashmap"
+            ],
+            state: [
+
+            ]
+        },
+    ];
 
     const [filterArray, setFilterArray] = useState(list);
 
-    const filteredData = currentFilter != "" ? problems.filter((problem) => {
-            return problem.title === currentFilter;
-        }
-    ) : problems; 
+    const filteredData = problems.filter((problem) => {
+        return filterArray.every((tag) => problem.tags.includes(tag))
+    });
 
-    const currentTableData = useMemo(() => {
+
+    const currentTableData = () => {
     const firstPageIndex = (currentPage - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
-    return problems.slice(firstPageIndex, lastPageIndex);}, [currentPage]);
-
-    console.log(problems.filter((problem) => problem.title === currentFilter));
-    console.log("Массив фильров - " + filterArray);
+    return filteredData.slice(firstPageIndex, lastPageIndex);};
 
     return (
         <>
@@ -65,7 +114,23 @@ const ProblemsTable:React.FC<ProblemsTableProps> = () => {
                 onFilterChange={currentFilter => setCurrentFilter(currentFilter)} 
                 filtersArray={filterArray}
                 onSetFilterArray={filterArray => setFilterArray(filterArray)}
+                filterStructure={filterStructure}
             />
+             <div className='tags'>
+        {filterArray.length > 0
+          ? filterArray.map((tag, id) => {
+              return (
+                <button
+                  key={`close-button-${id}`}
+                  className='close'
+                  //onClick={setFilterArray(filterArray.filter((obj) => obj !== tag))}
+                >
+                  {tag} &nbsp; x
+                </button>
+              );
+            })
+          : 'No tags selected'}
+      </div>
             <div className='problems-table'>
                 <div className='start-table'>
                     <div className='start-two'>
@@ -78,8 +143,8 @@ const ProblemsTable:React.FC<ProblemsTableProps> = () => {
                     </div>
                 </div>
                 <div className='content-table'>
-                    {currentTableData.map((problem, index) => (
-                        <Problem {...problem} key={index}/>
+                    {currentTableData().map((problem, index) => (
+                        <Problem {...problem} key={index} />
                     ))}
                 </div>
                 <Pagination
