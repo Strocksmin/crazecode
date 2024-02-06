@@ -5,43 +5,52 @@ import Pagination from '../Pagination/Pagination';
 import FilterMenu from '../Filter/FilterMenu';
 
 type ProblemsTableProps = {
-    
+
 };
+
 let list: string[] = [];
+
 const pageSize = 5;
 
-const ProblemsTable:React.FC<ProblemsTableProps> = () => {
+const ProblemsTable: React.FC<ProblemsTableProps> = () => {
     const [currentPage, setCurrentPage] = useState(1);
 
-    const [isTaged, setTaged] = useState(false);
-
-    const [currentFilter, setCurrentFilter] = useState("");
-    
     const [problems, setProblems] = useState([
-        {status: 'Решено', title: 'Two sum', 
-        solve: 'Решение', complexity:  1, tags: [
-            'array',
-            'hashmap',],
+        {
+            status: 'Решено', title: 'Two sum',
+            solve: 'Решение', complexity: 1, tags: [
+                'array',
+                'hashmap',],
         },
-        {status: 'Решено', title: 'Unique Number of Occurrences', 
-        solve: 'Решение', complexity:  1, tags: [
-            'array',
-            'set',],},
-        {status: 'Решено', title: 'FizzBuzz', 
-        solve: 'Решение', complexity:  1,tags: [
-            'array',],},
-        {status: 'Решено', title: 'Find Beautiful Indices in the Given Array II', 
-        solve: 'Решение', complexity:  3,tags: [
-            'array',
-            'hashmap',],},
-        {status: 'Решено', title: 'Two sum', 
-        solve: 'Решение', complexity:  1, tags: [
-            'array',
-            'hashmap',],},
-        {status: 'Решено', title: 'Unique Number of Occurrences', 
-        solve: 'Решение', complexity:  1, tags: [
-            'array',
-            'set',],},
+        {
+            status: 'Решено', title: 'Unique Number of Occurrences',
+            solve: 'Решение', complexity: 1, tags: [
+                'array',
+                'set',],
+        },
+        {
+            status: 'Решено', title: 'FizzBuzz',
+            solve: 'Решение', complexity: 1, tags: [
+                'array',],
+        },
+        {
+            status: 'Решено', title: 'Find Beautiful Indices in the Given Array II',
+            solve: 'Решение', complexity: 3, tags: [
+                'array',
+                'hashmap',],
+        },
+        {
+            status: 'Решено', title: 'Two sum',
+            solve: 'Решение', complexity: 1, tags: [
+                'array',
+                'hashmap',],
+        },
+        {
+            status: 'Решено', title: 'Unique Number of Occurrences',
+            solve: 'Решение', complexity: 1, tags: [
+                'array',
+                'set',],
+        },
         /*{status: 'Решено', title: 'FizzBuzz', 
         solve: 'Решение', complexity:  1},
         {status: 'Решено', title: 'Find Beautiful Indices in the Given Array II', 
@@ -99,35 +108,35 @@ const ProblemsTable:React.FC<ProblemsTableProps> = () => {
     });
 
     const currentTableData = () => {
-    const firstPageIndex = (currentPage - 1) * pageSize;
-    const lastPageIndex = firstPageIndex + pageSize;
-    return filteredData.slice(firstPageIndex, lastPageIndex);};
+        const firstPageIndex = (currentPage - 1) * pageSize;
+        const lastPageIndex = firstPageIndex + pageSize;
+        return filteredData.slice(firstPageIndex, lastPageIndex);
+    };
 
     return (
         <>
-            <FilterMenu 
-                onFilterChange={currentFilter => setCurrentFilter(currentFilter)} 
+            <FilterMenu
                 filtersArray={filterArray}
                 onSetFilterArray={filterArray => setFilterArray(filterArray)}
                 filterStructure={filterStructure}
                 searchTerm={searchTerm}
                 onSetSearchTerm={searchTerm => setSearchTerm(searchTerm)}
             />
-             <div className='tags'>
-        {filterArray.length > 0
-          ? filterArray.map((tag, id) => {
-              return (
-                <button
-                  key={`close-button-${id}`}
-                  className='close'
-                  //onClick={setFilterArray(filterArray.filter((obj) => obj !== tag))}
-                >
-                  {tag} &nbsp; x
-                </button>
-              );
-            })
-          : 'No tags selected'}
-      </div>
+            <div className='tags'>
+                {filterArray.length > 0
+                    ? filterArray.map((tag, id) => {
+                        return (
+                            <button
+                                key={`close-button-${id}`}
+                                className='close'
+                            //onClick={setFilterArray(filterArray.filter((obj) => obj !== tag))}
+                            >
+                                {tag} &nbsp; x
+                            </button>
+                        );
+                    })
+                    : 'No tags selected'}
+            </div>
             <div className='problems-table'>
                 <div className='start-table'>
                     <div className='start-two'>
@@ -145,12 +154,12 @@ const ProblemsTable:React.FC<ProblemsTableProps> = () => {
                     ))}
                 </div>
                 <Pagination
-            className="pagination-bar"
-            currentPage={currentPage}
-            totalCount={filteredData.length}
-            pageSize={pageSize}
-            onPageChange={page => setCurrentPage(page)}
-            />
+                    className="pagination-bar"
+                    currentPage={currentPage}
+                    totalCount={filteredData.length}
+                    pageSize={pageSize}
+                    onPageChange={page => setCurrentPage(page)}
+                />
             </div>
         </>
     )

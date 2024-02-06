@@ -4,11 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
 type FooterProps = {
-    
+
 };
 
-const Footer:React.FC<FooterProps> = () => {
-    
+const Footer: React.FC<FooterProps> = () => {
+
     return (
         <footer className='footer'>
             <div className='footer-content'>

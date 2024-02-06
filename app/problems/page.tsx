@@ -4,18 +4,18 @@ import ProblemsTable from '../components/Problems/ProblemsTable';
 import Footer from '../components/Footer/Footer';
 
 type ProblemsPageProps = {
-    
+
 };
 
-const ProblemsPage:React.FC<ProblemsPageProps> = () => {
-    
+const ProblemsPage: React.FC<ProblemsPageProps> = () => {
+
     return (
         <>
-        <Navbar></Navbar>
-        <main>
-        <ProblemsTable />
-        </main>
-        <Footer />
+            <Navbar></Navbar>
+            <main>
+                <ProblemsTable />
+            </main>
+            <Footer />
         </>
     )
 }

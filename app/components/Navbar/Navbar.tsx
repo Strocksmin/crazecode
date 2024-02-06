@@ -2,16 +2,16 @@ import Link from 'next/link';
 import React from 'react';
 
 type navbarProps = {
-    
+
 };
 
-const navbar:React.FC<navbarProps> = () => {
+const navbar: React.FC<navbarProps> = () => {
     return (
         <header className='header'>
             <div className='content'>
                 <div className='header-logo'>
                     <a href="/" className="logoRef">
-                        <img className="logo" src="https://i.postimg.cc/sDdJxVbb/logo-Craze-Code.png" alt="CrazeCode"/>
+                        <img className="logo" src="https://i.postimg.cc/sDdJxVbb/logo-Craze-Code.png" alt="CrazeCode" />
                     </a>
                 </div>
                 <div className='menu'>

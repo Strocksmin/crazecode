@@ -65,7 +65,7 @@ const Pagination: FC<PaginationProps> = (props) => {
               selected: pageNumber === currentPage
             })}
             onClick={() => onPageChange(pageNumber as number)}
-          key={index}>
+            key={index}>
             {pageNumber}
           </li>
         );

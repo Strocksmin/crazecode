@@ -4,18 +4,16 @@ import React, { useState } from 'react';
 import FilterButton from './FilterButton';
 
 type FilterProps = {
-    onFilterChange: (currentFilter: string) => void,
     title: string,
     content: string[],
     filters: string[],
     onSetFilterArray: (filtersArray: string[]) => void;
 };
 
-const Filter:React.FC<FilterProps> = (props) => {
+const Filter: React.FC<FilterProps> = (props) => {
     const {
         title,
         content,
-        onFilterChange,
         filters,
         onSetFilterArray,
     } = props;
@@ -23,18 +21,11 @@ const Filter:React.FC<FilterProps> = (props) => {
     const [isActive, setActive] = useState(false);
 
     const clickHandler = () => {
-        setActive(isActive => { return !isActive});
+        setActive(isActive => { return !isActive });
     }
 
-    const [selected, isSelected] = useState(false);
-
-    const [isFiltered, setFilter] = useState(false);
-
-    let defFilter:number = 0;
-
-
     function toggleStyle(obj: string) {
-        const i:string = obj;
+        const i: string = obj;
         if (filters.includes(i)) {
             return true;
         }
@@ -43,14 +34,13 @@ const Filter:React.FC<FilterProps> = (props) => {
         }
     }
 
-    const filterClickHandler = (filter: string, i:number) => {
+    const filterClickHandler = (filter: string, i: number) => {
         if (!filters.includes(filter)) {
             onSetFilterArray([...filters, filter]);
         }
         else {
             onSetFilterArray(filters.filter((obj) => obj !== filter))
         }
-        onFilterChange(filter)
     }
 
     return (
@@ -65,13 +55,13 @@ const Filter:React.FC<FilterProps> = (props) => {
                 <div className='dropdown-content'>
                     {content.map((f, index) => (
                         <FilterButton text={f}
-                        key={index}
-                        onClick={() => filterClickHandler(f, index)}
-                        selected={toggleStyle(f)}
+                            key={index}
+                            onClick={() => filterClickHandler(f, index)}
+                            selected={toggleStyle(f)}
                         >
                             {f}
                         </FilterButton>
-                    )) }
+                    ))}
                 </div>
             </div>
         </div>

@@ -1,14 +1,14 @@
 import React from 'react';
 
 type ProblemProps = {
-    status:string,
-    title:string,
-    solve:string,
-    complexity:number,
+    status: string,
+    title: string,
+    solve: string,
+    complexity: number,
 };
 
-const Problem:React.FC<ProblemProps> = ({status, title, solve, complexity}, filtered) => {
-    
+const Problem: React.FC<ProblemProps> = ({ status, title, solve, complexity }, filtered) => {
+
     return (
         <div className='problem'>
             <div className='start-two'>
