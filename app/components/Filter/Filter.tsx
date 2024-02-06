@@ -44,7 +44,7 @@ const Filter: React.FC<FilterProps> = (props) => {
     }
 
     return (
-        <div className="filter-content">
+        <div className="filters-content">
             <div className='filter-up' onClick={clickHandler}>
                 <span>
                     {title}

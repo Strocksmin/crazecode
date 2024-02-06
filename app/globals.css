@@ -465,7 +465,7 @@ main {
 .filter-menu {
     display: flex;
     justify-content: flex-start;
-    margin-top: 50px;
+    margin-top: 50px !important;
 }
 
 .filter-buttons {
@@ -478,21 +478,22 @@ main {
     justify-content: center;
 }
 
-.filter-content {
-    width: 175px;
+.filters-content {
+    width: 175px !important;
 }
 
-.filter-content:hover {
+.filters-content:hover {
     background-color: #d4d4d449;
 }
 
 .filter-up {
     border: 1px #e2e2e2 solid;
-    padding: 5px 10px;
+    padding: 7px 10px !important;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 3rem;
+    border-radius: 5px;
 }
 
 .dropdown-content {
@@ -521,7 +522,7 @@ main {
 }
 
 .dropdown-button:hover {
-    background-color: #ccc;
+    background-color: rgb(225, 226, 227);
 }
 
 .display-none {
@@ -529,7 +530,7 @@ main {
 }
 
 .dropdown-button-clicked {
-    background-color: rgb(5, 26, 255);
+    background-color: rgb(225, 226, 227);
     padding: 10px;
     display: flex;
     width: 100%;

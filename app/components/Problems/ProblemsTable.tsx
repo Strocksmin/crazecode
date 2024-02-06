@@ -1,8 +1,11 @@
 "use client"
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import Problem from './Problem';
 import Pagination from '../Pagination/Pagination';
 import FilterMenu from '../Filter/FilterMenu';
+import { Icon, Label } from 'semantic-ui-react'
+import "semantic-ui-css/components/label.min.css"
+import "semantic-ui-css/components/icon.min.css"
 
 type ProblemsTableProps = {
 
@@ -19,37 +22,37 @@ const ProblemsTable: React.FC<ProblemsTableProps> = () => {
         {
             status: 'Решено', title: 'Two sum',
             solve: 'Решение', complexity: 1, tags: [
-                'array',
-                'hashmap',],
+                'Array',
+                'Hashmap',],
         },
         {
             status: 'Решено', title: 'Unique Number of Occurrences',
             solve: 'Решение', complexity: 1, tags: [
-                'array',
-                'set',],
+                'Array',
+                'Set',],
         },
         {
             status: 'Решено', title: 'FizzBuzz',
             solve: 'Решение', complexity: 1, tags: [
-                'array',],
+                'Array',],
         },
         {
             status: 'Решено', title: 'Find Beautiful Indices in the Given Array II',
             solve: 'Решение', complexity: 3, tags: [
-                'array',
-                'hashmap',],
+                'Array',
+                'Hashmap',],
         },
         {
             status: 'Решено', title: 'Two sum',
             solve: 'Решение', complexity: 1, tags: [
-                'array',
-                'hashmap',],
+                'Array',
+                'Hashmap',],
         },
         {
             status: 'Решено', title: 'Unique Number of Occurrences',
             solve: 'Решение', complexity: 1, tags: [
-                'array',
-                'set',],
+                'Array',
+                'Set',],
         },
         /*{status: 'Решено', title: 'FizzBuzz', 
         solve: 'Решение', complexity:  1},
@@ -87,7 +90,7 @@ const ProblemsTable: React.FC<ProblemsTableProps> = () => {
         {
             title: "Тема",
             content: [
-                "set", "array", "hashmap"
+                "Set", "Array", "Hashmap"
             ],
             state: [
 
@@ -98,6 +101,10 @@ const ProblemsTable: React.FC<ProblemsTableProps> = () => {
     const [searchTerm, setSearchTerm] = useState("");
 
     const [filterArray, setFilterArray] = useState(list);
+
+    const handleClick = (tag: string) => {
+        setFilterArray(filterArray.filter((obj) => obj !== tag));
+    };
 
     const searchResults = !searchTerm ? problems : problems.filter(
         (problem) => problem.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -126,16 +133,16 @@ const ProblemsTable: React.FC<ProblemsTableProps> = () => {
                 {filterArray.length > 0
                     ? filterArray.map((tag, id) => {
                         return (
-                            <button
+                            <Label as='a'
                                 key={`close-button-${id}`}
-                                className='close'
                             //onClick={setFilterArray(filterArray.filter((obj) => obj !== tag))}
                             >
-                                {tag} &nbsp; x
-                            </button>
+                                {tag} &nbsp;
+                               <Icon name='delete' onClick={() => handleClick(tag)}/> 
+                            </Label>
                         );
                     })
-                    : 'No tags selected'}
+                    : ''}
             </div>
             <div className='problems-table'>
                 <div className='start-table'>

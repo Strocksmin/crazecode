@@ -1,5 +1,4 @@
 import "semantic-ui-css/components/input.min.css"
-import "semantic-ui-css/components/icon.min.css"
 import React from 'react';
 import Filter from './Filter';
 import Input from 'semantic-ui-react/dist/commonjs/elements/Input/Input';
@@ -37,13 +36,13 @@ const FilterMenu: React.FC<FilterMenuProps> = (props) => {
                             key={index}
                         />
                     ))}
-                </div>
-                <div className="ui icon input">
-                    <Input
-                        icon='search'
-                        placeholder='Search...'
-                        value={searchTerm}
-                        onChange={handleChange} />
+                    <div className="ui icon input">
+                        <Input
+                            icon='search'
+                            placeholder='Поиск...'
+                            value={searchTerm}
+                            onChange={handleChange} />
+                    </div>
                 </div>
             </div>
         </div>

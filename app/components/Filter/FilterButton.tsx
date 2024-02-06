@@ -15,9 +15,9 @@ const FilterButton: React.FC<FilterButtonProps> = (props) => {
         selected
     } = props;
 
-    return (<button className='dropdown-button'
+    return (<button className={selected ? 'dropdown-button-clicked' : 'dropdown-button'}
         onClick={() => onClick()}
-        style={{ backgroundColor: selected ? '#f5f' : 'grey' }}
+        
     >
         {text}
     </button>)
