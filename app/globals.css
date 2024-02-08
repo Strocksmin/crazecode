@@ -569,6 +569,11 @@ main {
     cursor: col-resize;
 }
 
+.gutter.gutter-vertical {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII=);
+    cursor: row-resize;
+}
+
 .example-card pre {
     background-color: hsl(0, 0%, 85%);
     border-radius: .5rem;
@@ -579,7 +584,8 @@ main {
     padding: 1rem;
 }
 
-.example-card pre, code {
+.example-card pre,
+code {
     white-space: pre-wrap;
     color: black;
 }
@@ -598,7 +604,8 @@ main {
     overflow-y: auto;
 }
 
-.example-card pre, code {
+.example-card pre,
+code {
     white-space: pre-wrap;
     color: rgb(0, 0, 0);
 }
