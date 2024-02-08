@@ -1,6 +1,6 @@
-/*@tailwind base;
+@tailwind base;
 @tailwind components;
-@tailwind utilities; */
+@tailwind utilities;
 /*
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -551,4 +551,65 @@ main {
     margin: 15px auto 0 auto;
     display: flex;
     justify-content: flex-start;
+}
+
+.split {
+    display: flex;
+    flex-direction: row;
+}
+
+.gutter {
+    background-color: #eee;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.gutter.gutter-horizontal {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+    cursor: col-resize;
+}
+
+.example-card pre {
+    background-color: hsl(0, 0%, 85%);
+    border-radius: .5rem;
+    font-size: .98rem;
+    line-height: 1.25rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    padding: 1rem;
+}
+
+.example-card pre, code {
+    white-space: pre-wrap;
+    color: black;
+}
+
+.bg-dark-layer-1 {
+    --tw-bg-opacity: 1;
+    background-color: #efefefc9;
+}
+
+.bg-dark-layer-2 {
+    --tw-bg-opacity: 1;
+    background-color: #fff;
+}
+
+.overflow-y-auto {
+    overflow-y: auto;
+}
+
+.example-card pre, code {
+    white-space: pre-wrap;
+    color: rgb(0, 0, 0);
+}
+
+code {
+    border-radius: 5px;
+    border-width: 1px;
+    font-size: .75rem;
+    line-height: 1rem;
+    padding: .125rem;
+    letter-spacing: 1px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.15);
 }

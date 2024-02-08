@@ -1,8 +1,10 @@
+'use client'
 import React from 'react';
 import Footer from '../components/Footer/Footer';
-import ProblemsTable from '../components/Problems/ProblemsTable';
 import Navbar from '../components/Navbar/Navbar';
-import FilterMenu from '../components/Filter/FilterMenu';
+import Split from "react-split";
+import Workspace from '../components/Workspace/Workspace';
+
 
 type TestPageProps = {
     
@@ -13,9 +15,8 @@ const TestPage:React.FC<TestPageProps> = () => {
         <>
         <Navbar></Navbar>
         <main>
-        <ProblemsTable />
+        <Workspace></Workspace>
         </main>
-        <Footer />
         </>
     )
 }

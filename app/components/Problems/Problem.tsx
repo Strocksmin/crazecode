@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 type ProblemProps = {
@@ -13,7 +14,11 @@ const Problem: React.FC<ProblemProps> = ({ status, title, solve, complexity }, f
         <div className='problem'>
             <div className='start-two'>
                 <div>{status}</div>
-                <div className='problem-start-table-title'>{title}</div>
+                <div className='problem-start-table-title'>
+                    <Link href="" className='hover:text-blue-600 cursor-pointer' target='_blank'>
+                        {title}
+                    </Link>
+                </div>
             </div>
             <div className='start-last2'>
                 <div>{solve}</div>
