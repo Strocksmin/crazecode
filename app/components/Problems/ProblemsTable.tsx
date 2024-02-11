@@ -20,13 +20,13 @@ const ProblemsTable: React.FC<ProblemsTableProps> = () => {
 
     const [problems, setProblems] = useState([
         {
-            status: 'Решено', title: 'Two sum',
+            status: 'Решено', title: 'Two-sum',
             solve: 'Решение', complexity: 1, tags: [
                 'Array',
                 'Hashmap',],
         },
         {
-            status: 'Решено', title: 'Unique Number of Occurrences',
+            status: 'Решено', title: 'Unique-Number-of-Occurrences',
             solve: 'Решение', complexity: 1, tags: [
                 'Array',
                 'Set',],
@@ -37,19 +37,19 @@ const ProblemsTable: React.FC<ProblemsTableProps> = () => {
                 'Array',],
         },
         {
-            status: 'Решено', title: 'Find Beautiful Indices in the Given Array II',
+            status: 'Решено', title: 'Find-Beautiful-Indices-in-the-Given-Array-II',
             solve: 'Решение', complexity: 3, tags: [
                 'Array',
                 'Hashmap',],
         },
         {
-            status: 'Решено', title: 'Two sum',
+            status: 'Решено', title: 'Two-sum',
             solve: 'Решение', complexity: 1, tags: [
                 'Array',
                 'Hashmap',],
         },
         {
-            status: 'Решено', title: 'Unique Number of Occurrences',
+            status: 'Решено', title: 'Unique-Number-of-Occurrences',
             solve: 'Решение', complexity: 1, tags: [
                 'Array',
                 'Set',],
@@ -157,7 +157,7 @@ const ProblemsTable: React.FC<ProblemsTableProps> = () => {
                 </div>
                 <div className='content-table'>
                     {currentTableData().map((problem, index) => (
-                        <Problem {...problem} key={index} />
+                        <Problem problem={problem}/*{...problem}*/ key={index} />
                     ))}
                 </div>
                 <Pagination
