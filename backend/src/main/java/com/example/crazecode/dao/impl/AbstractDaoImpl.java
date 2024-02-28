@@ -6,7 +6,6 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
 import org.springframework.lang.NonNull;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -43,23 +42,35 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
                           String orderBy,
                           boolean asc,
                           int limit) {
-        /*CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<T> cq = cb.createQuery(daoEntityClass());
-        Root<T> tRoot = cq.from(daoEntityClass());
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(daoEntityClass());
+        Root<T> tRoot = criteriaQuery.from(daoEntityClass());
 
-        Order order = new OrderImpl(tRoot.get(orderBy), asc);
+
         List<Predicate> predicates = new ArrayList<>();
-        mapOfFieldNamesAndValuesToSelectBy.forEach((key, value) -> predicates.add(cb.equal(tRoot.get(key), value)));
+        mapOfFieldNamesAndValuesToSelectBy.forEach((key, value) ->
+                predicates.add(criteriaBuilder.equal(tRoot.get(key), value)));
 
-        TypedQuery<T> query = entityManager.createQuery(cq
+        TypedQuery<T> query = entityManager.createQuery(criteriaQuery
                 .select(tRoot)
                 .where(predicates.toArray(new Predicate[]{}))
-                .orderBy(order)
         );
 
         return query
                 .setMaxResults(limit)
-                .getResultList();*/
-        return null;
+                .getResultList();
+    }
+
+    @Override
+    public List<T> getAll() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(daoEntityClass());
+        Root<T> tRoot = criteriaQuery.from(daoEntityClass());
+
+        TypedQuery<T> query = entityManager.createQuery(criteriaQuery
+                .select(tRoot)
+        );
+
+        return query.getResultList();
     }
 }

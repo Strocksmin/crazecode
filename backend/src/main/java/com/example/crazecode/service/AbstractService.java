@@ -18,4 +18,6 @@ public interface AbstractService<T> {
                    int limit);
 
     T getById(Long id);
+
+    List<T> getAll();
 }

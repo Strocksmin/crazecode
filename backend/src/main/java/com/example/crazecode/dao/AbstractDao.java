@@ -20,4 +20,6 @@ public interface AbstractDao<T> {
                    String orderBy,
                    boolean asc,
                    int limit);
+
+    List<T> getAll();
 }

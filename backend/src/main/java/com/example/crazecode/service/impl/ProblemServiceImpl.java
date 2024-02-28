@@ -15,26 +15,6 @@ public class ProblemServiceImpl extends AbstractServiceImpl<Problem, ProblemDao>
 
     private final ProblemDao problemDao;
     @Override
-    public Problem update(Problem element) {
-        return null;
-    }
-
-    @Override
-    public void deleteById(Long id) {
-
-    }
-
-    @Override
-    public List<Problem> getAll(Map<String, Object> fieldNamesAndValuesToSelectBy, String orderBy, boolean asc, int limit) {
-        return null;
-    }
-
-    @Override
-    public Problem getById(Long id) {
-        return null;
-    }
-
-    @Override
     protected ProblemDao getDefaultDao() {
         return problemDao;
     }
