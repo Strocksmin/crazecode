@@ -1,13 +1,18 @@
-CREATE TABLE Problem (
+DROP TABLE problem_tags;
+DROP TABLE problem;
+
+CREATE TABLE problem (
     problem_id SERIAL PRIMARY KEY,
     title varchar(20),
-    complexity varchar(10),
-    tags varchar[]
+    complexity varchar(10)
 );
 
-INSERT INTO Problem (title, complexity, tags) VALUES ('Two-sum', 'Easy', '{"Array", "Hashmap"}');
+CREATE TABLE problem_tags (
+    problem_id int REFERENCES problem(problem_id) not null,
+    tag varchar(10)
+);
 
-CREATE TABLE ProblemDescription (
+CREATE TABLE problemDescription (
     problem_id SERIAL PRIMARY KEY,
     order int,
     title varchar(20),
