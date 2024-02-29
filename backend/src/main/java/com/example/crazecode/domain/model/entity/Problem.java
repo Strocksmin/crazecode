@@ -30,4 +30,8 @@ public class Problem {
     @CollectionTable(name = "problem_tags", joinColumns = @JoinColumn(name = "problem_id"))
     @Column(name = "tag")
     private List<String> tags;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "description", referencedColumnName = "description_id")
+    private ProblemDescription problemDescription;
 }
