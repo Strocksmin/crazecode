@@ -1,4 +1,4 @@
-package com.example.crazecode.controller;
+package com.example.crazecode.controller.restcontroller;
 
 import com.example.crazecode.dao.impl.ProblemDaoImpl;
 import com.example.crazecode.dao.impl.ProblemDescriptionDaoImpl;

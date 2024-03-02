@@ -1,7 +1,9 @@
-package com.example.crazecode.controller;
+package com.example.crazecode.controller.restcontroller;
 
+import com.example.crazecode.controller.mapper.ProblemMapper;
 import com.example.crazecode.dao.impl.ProblemDaoImpl;
 import com.example.crazecode.dao.impl.ProblemDescriptionDaoImpl;
+import com.example.crazecode.domain.dto.ProblemDto;
 import com.example.crazecode.domain.model.entity.Problem;
 import com.example.crazecode.domain.model.entity.ProblemDescription;
 import com.example.crazecode.service.impl.ProblemDescriptionServiceImpl;
@@ -15,14 +17,15 @@ import java.util.List;
 
 @RestController
 public class ProblemSetController {
-    ProblemServiceImpl problemService;
-    ProblemDaoImpl problemDao;
+    private final ProblemServiceImpl problemService;
+    private final ProblemDaoImpl problemDao;
+    private final ProblemMapper problemMapper;
 
     @Autowired
-    public ProblemSetController(ProblemServiceImpl problemService, ProblemDaoImpl problemDao) {
+    public ProblemSetController(ProblemServiceImpl problemService, ProblemDaoImpl problemDao, ProblemMapper problemMapper) {
         this.problemService = problemService;
         this.problemDao = problemDao;
-
+        this.problemMapper = problemMapper;
     }
     @GetMapping()
     public String getHome() {
@@ -30,8 +33,10 @@ public class ProblemSetController {
     }
 
     @GetMapping(value = "/{id}")
-    public Problem getProblemById(@PathVariable("id") Long id) {
-        return problemService.getById(id);
+    public ProblemDto getProblemById(@PathVariable("id") Long id) {
+        Problem problem = problemService.getById(id);
+        return problemMapper.convertToDto(problem);
+        //return problemService.getById(id);
     }
 
     @GetMapping(value = "/problems")

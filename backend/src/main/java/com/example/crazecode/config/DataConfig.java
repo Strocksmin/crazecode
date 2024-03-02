@@ -1,6 +1,8 @@
 package com.example.crazecode.config;
 
 import jakarta.persistence.EntityManagerFactory;
+import org.hibernate.collection.spi.PersistentCollection;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -11,9 +13,24 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.util.Objects;
+
 @EnableTransactionManagement
 @Configuration
 public class DataConfig {
+
+    @Bean
+    public ModelMapper modelMapper() {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setPropertyCondition(context -> {
+            Object src = context.getSource();
+            if (src instanceof PersistentCollection) {
+                return ((PersistentCollection) src).wasInitialized();
+            }
+            return !Objects.isNull(src);
+        });
+        return modelMapper;
+    }
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
