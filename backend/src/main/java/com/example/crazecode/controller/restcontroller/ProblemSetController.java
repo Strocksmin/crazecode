@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class ProblemSetController {
@@ -36,12 +37,11 @@ public class ProblemSetController {
     public ProblemDto getProblemById(@PathVariable("id") Long id) {
         Problem problem = problemService.getById(id);
         return problemMapper.convertToDto(problem);
-        //return problemService.getById(id);
     }
 
     @GetMapping(value = "/problems")
-    public List<Problem> getAllProblems() {
-        return problemService.getAll();
+    public List<ProblemDto> getAllProblems() {
+        return problemService.getAll().stream().map(problemMapper::convertToDto).collect(Collectors.toList());
     }
 
 }
