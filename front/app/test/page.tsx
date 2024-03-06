@@ -13,10 +13,6 @@ type TestPageProps = {
 const TestPage:React.FC<TestPageProps> = () => {    
     return (
         <>
-        <Navbar></Navbar>
-        <main>
-        <Workspace></Workspace>
-        </main>
         </>
     )
 }

@@ -2,7 +2,7 @@
 
 Технологии: Typescript, Next.js, TailiwindCSS, Java, Spring Boot, PostgreSQL, Judge0.
 
-Приложение находится в стадии разработки.
+### Приложение находится в стадии разработки.
 
 ## Развертывание
 

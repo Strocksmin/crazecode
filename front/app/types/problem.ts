@@ -1,22 +1,20 @@
 export type Example = {
 	id: number;
-	inputText: string;
-	outputText: string;
-	explanation?: string;
-	img?: string;
+	input_text: string;
+	output_text: string;
+	explanation: string
 };
 
 // local problem data
 export type Problem = {
-	id: string;
+	id: number;
+	number: number;
 	title: string;
-	problemStatement: string;
-	examples: Example[];
-	constraints: string;
-	order: number;
+	statement: string;
+	conditions: string;
 	starterCode: string;
-	handlerFunction: ((fn: any) => boolean) | string;
 	starterFunctionName: string;
+	examples: Example[]
 };
 
 export type DBProblem = {

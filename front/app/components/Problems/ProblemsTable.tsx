@@ -1,11 +1,12 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Problem from './Problem';
 import Pagination from '../Pagination/Pagination';
 import FilterMenu from '../Filter/FilterMenu';
 import { Icon, Label } from 'semantic-ui-react'
 import "semantic-ui-css/components/label.min.css"
 import "semantic-ui-css/components/icon.min.css"
+
 
 type ProblemsTableProps = {
 
@@ -20,53 +21,64 @@ const ProblemsTable: React.FC<ProblemsTableProps> = () => {
 
     const [problems, setProblems] = useState([
         {
-            status: 'Решено', title: 'Two-sum',
-            solve: 'Решение', complexity: 1, tags: [
+            problem_id: 1, title: 'Two-sum',
+            complexity: "Easy", tags: [
                 'Array',
-                'Hashmap',],
+                'Hashmap',]
         },
         {
-            status: 'Решено', title: 'Unique-Number-of-Occurrences',
-            solve: 'Решение', complexity: 1, tags: [
+            problem_id: 2, title: 'Unique-Number-of-Occurrences',
+            complexity: "Easy", tags: [
                 'Array',
-                'Set',],
+                'Set',]
         },
         {
-            status: 'Решено', title: 'FizzBuzz',
-            solve: 'Решение', complexity: 1, tags: [
-                'Array',],
+            problem_id: 3, title: 'FizzBuzz',
+            complexity: "Easy", tags: [
+                'Array',]
         },
         {
-            status: 'Решено', title: 'Find-Beautiful-Indices-in-the-Given-Array-II',
-            solve: 'Решение', complexity: 3, tags: [
+            problem_id: 4, title: 'Find-Beautiful-Indices-in-the-Given-Array-II',
+            complexity: "Medium", tags: [
                 'Array',
-                'Hashmap',],
+                'Hashmap',]
         },
         {
-            status: 'Решено', title: 'Two-sum',
-            solve: 'Решение', complexity: 1, tags: [
+            problem_id: 5, title: 'Two-sum',
+            complexity: "Easy", tags: [
                 'Array',
-                'Hashmap',],
+                'Hashmap',]
         },
         {
-            status: 'Решено', title: 'Unique-Number-of-Occurrences',
-            solve: 'Решение', complexity: 1, tags: [
+            problem_id: 6, title: 'Unique-Number-of-Occurrences',
+            complexity: "Easy", tags: [
                 'Array',
-                'Set',],
+                'Set',]
         },
-        /*{status: 'Решено', title: 'FizzBuzz', 
-        solve: 'Решение', complexity:  1},
-        {status: 'Решено', title: 'Find Beautiful Indices in the Given Array II', 
-        solve: 'Решение', complexity:  3},
-        {status: 'Решено', title: 'Two sum', 
-        solve: 'Решение', complexity:  1},
-        {status: 'Решено', title: 'Unique Number of Occurrences', 
-        solve: 'Решение', complexity:  1},
-        {status: 'Решено', title: 'FizzBuzz', 
-        solve: 'Решение', complexity:  1},
-        {status: 'Решено', title: 'Find Beautiful Indices in the Given Array II', 
-        solve: 'Решение', complexity:  3}*/
+        /*{problem_id: 1, title: 'FizzBuzz', 
+        complexity:  1},
+        {problem_id: 1, title: 'Find Beautiful Indices in the Given Array II', 
+        complexity:  3},
+        {problem_id: 1, title: 'Two sum', 
+        complexity:  1},
+        {problem_id: 1, title: 'Unique Number of Occurrences', 
+        complexity:  1},
+        {problem_id: 1, title: 'FizzBuzz', 
+        complexity:  1},
+        {problem_id: 1, title: 'Find Beautiful Indices in the Given Array II', 
+        complexity:  3}*/
     ]);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+          const response = await fetch('http://localhost:8080/problems');
+          const data = await response.json();
+          setProblems(data); }
+          catch (error) {console.log(error)}
+        }
+        fetchData();
+      }, []);
 
     const filterStructure = [
         {
@@ -131,10 +143,10 @@ const ProblemsTable: React.FC<ProblemsTableProps> = () => {
             />
             <div className='tags'>
                 {filterArray.length > 0
-                    ? filterArray.map((tag, id) => {
+                    ? filterArray.map((tag, problem_id) => {
                         return (
                             <Label as='a'
-                                key={`close-button-${id}`}
+                                key={`close-button-${problem_id}`}
                             //onClick={setFilterArray(filterArray.filter((obj) => obj !== tag))}
                             >
                                 {tag} &nbsp;
@@ -147,17 +159,17 @@ const ProblemsTable: React.FC<ProblemsTableProps> = () => {
             <div className='problems-table'>
                 <div className='start-table'>
                     <div className='start-two'>
-                        <div>Статус</div>
+                        <div>Номер</div>
                         <div className='start-table-title'>Название</div>
                     </div>
                     <div className='start-last'>
-                        <div>Решение</div>
+                        <div>Сложность</div>
                         <div>Сложность</div>
                     </div>
                 </div>
                 <div className='content-table'>
                     {currentTableData().map((problem, index) => (
-                        <Problem problem={problem}/*{...problem}*/ key={index} />
+                        <Problem problem={problem} key={index} />
                     ))}
                 </div>
                 <Pagination

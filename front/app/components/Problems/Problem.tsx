@@ -2,11 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 
 type ProblemProps = {
-    /*status: string,
-    title: string,
-    solve: string,
-    complexity: number, */
-    problem: {status: string, title: string, solve: string, complexity: number, tags: string[] }
+    problem: {problem_id: number, title: string, complexity: string, tags: string[] }
 };
 
 const Problem: React.FC<ProblemProps> = (props) => {
@@ -14,18 +10,20 @@ const Problem: React.FC<ProblemProps> = (props) => {
         problem
     } = props;
 
+    console.log(problem.problem_id)
+
     return (
         <div className='problem'>
             <div className='start-two'>
-                <div>{problem.status}</div>
+                <div>{problem.problem_id} </div>
                 <div className='problem-start-table-title'>
-                    <Link href={`/problems/${problem.title}`} className='hover:text-blue-600 cursor-pointer' target='_blank'>
+                    <Link href={`/problems/${problem.problem_id}`} className='hover:text-blue-600 cursor-pointer' target='_blank'>
                         {problem.title}
                     </Link>
                 </div>
             </div>
             <div className='start-last2'>
-                <div>{problem.solve}</div>
+                <div>{problem.complexity}</div>
                 <div>{problem.complexity}</div>
             </div>
         </div>

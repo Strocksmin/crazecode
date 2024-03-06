@@ -55,11 +55,11 @@ const Playground: React.FC<PlaygroundProps> = ({ problem }) => {
                         <div className='font-semibold my-4'>
                             <p className='text-sm font-medium mt-4 text-black'>Input:</p>
                             <div className='example-card'>
-                                <pre>{problem.examples[activeTestCaseId].inputText}</pre>
+                                <pre>{problem.examples[activeTestCaseId].input_text}</pre>
                             </div>
                             <p className='text-sm font-medium mt-4 text-black'>Output:</p>
                             <div className='example-card'>
-                                <pre>{problem.examples[activeTestCaseId].outputText}</pre>
+                                <pre>{problem.examples[activeTestCaseId].output_text}</pre>
                             </div>
                         </div>
                     </div>

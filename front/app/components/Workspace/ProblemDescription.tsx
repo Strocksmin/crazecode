@@ -2,7 +2,21 @@ import { Problem } from '@/app/types/problem';
 import React from 'react';
 
 type ProblemDescriptionProps = {
-    problem: Problem
+    problem: {
+        id: number;
+        number: number;
+        title: string;
+        statement: string;
+        conditions: string;
+        starterCode: string;
+        starterFunctionName: string;
+        examples: {
+            id: number;
+            input_text: string;
+            output_text: string;
+            explanation: string
+        }[]
+    };
 };
 
 const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem }) => {
@@ -68,7 +82,7 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem }) => {
 
                             {/* Problem Statement(paragraphs) */}
                             <div className='text-black text-sm'>
-                                <div dangerouslySetInnerHTML={{ __html: problem.problemStatement }} />
+                                <div dangerouslySetInnerHTML={{ __html: problem.statement }} />
                             </div>
 
                             {/* Examples */}
@@ -76,13 +90,13 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem }) => {
                                 {problem.examples.map((example, index) => (
                                     <div key={example.id}>
                                         <p className='font-medium text-black '>Example {index + 1}: </p>
-                                        {example.img && <img src={example.img} alt='' className='mt-3' />}
+                                        {/*example.img && <img src={example.img} alt='' className='mt-3' />*/}
                                         <div className='example-card'>
                                             <pre>
-                                                <strong className='text-black'>Input: </strong> {example.inputText}
+                                                <strong className='text-black'>Input: </strong> {example.input_text}
                                                 <br />
                                                 <strong>Output:</strong>
-                                                {example.outputText} <br />
+                                                {example.output_text} <br />
                                                 {example.explanation && (
                                                     <>
                                                         <strong>Explanation:</strong> {example.explanation}
@@ -98,7 +112,7 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem }) => {
                             <div className='my-8 pb-4'>
                                 <div className='text-black text-sm font-medium'>Constraints:</div>
                                 <ul className='text-black ml-5 list-disc '>
-                                    <div dangerouslySetInnerHTML={{ __html: problem.constraints }} />
+                                    <div dangerouslySetInnerHTML={{ __html: problem.conditions }} />
                                 </ul>
                             </div>
                         </div>

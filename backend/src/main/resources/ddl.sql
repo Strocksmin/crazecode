@@ -1,4 +1,7 @@
 TRUNCATE TABLE problem RESTART IDENTITY CASCADE;
+TRUNCATE TABLE examples RESTART IDENTITY CASCADE;
+TRUNCATE TABLE problemDescription RESTART IDENTITY CASCADE;
+TRUNCATE TABLE problem_tags RESTART IDENTITY CASCADE;
 DROP TABLE problem;
 DROP TABLE problemdescription;
 DROP TABLE examples;
@@ -8,7 +11,7 @@ CREATE TABLE problemDescription
 (
     description_id      SERIAL PRIMARY KEY,
     number              int,
-    title               varchar(20),
+    title               varchar(40),
     problemStatement    text,
     conditions          text,
     starterCode         text,
@@ -26,12 +29,12 @@ CREATE TABLE examples
 
 CREATE TABLE problem (
     problem_id SERIAL PRIMARY KEY,
-    title varchar(20),
-    complexity varchar(10),
+    title varchar(40),
+    complexity varchar(20),
     description int REFERENCES problemdescription(description_id) not null
 );
 
 CREATE TABLE problem_tags (
     problem_id int REFERENCES problem(problem_id) not null,
-    tag varchar(10)
+    tag varchar(20)
 );
