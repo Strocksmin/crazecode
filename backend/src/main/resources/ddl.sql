@@ -38,3 +38,51 @@ CREATE TABLE problem_tags (
     problem_id int REFERENCES problem(problem_id) not null,
     tag varchar(20)
 );
+
+
+/*CREATE TABLE users
+(
+    user_id     SERIAL PRIMARY KEY,
+    login               varchar(64),
+    password    varchar(64),
+    email          varchar(64)
+);
+
+CREATE TABLE languages
+(
+    language_id SERIAL PRIMARY KEY,
+    name varchar(16)
+    compile_cmd text,
+    run_cmd text,
+    source_file text
+);
+
+CREATE TABLE submissions
+(
+    submission_id SERIAL PRIMARY KEY,
+    source_code text,
+    language_id REFERENCES languages(language_id),
+    user_id REFERENCES users(user_id,)
+    stdin text,
+    expected_output text,
+    stdout text,
+    status_id int,
+    created_at datetime,
+    finished_at datetime,
+    time decimal,
+    memory int,
+    stderr text,
+    token text,
+    number_of_runs int, 
+    cpu_time_limit decimal,
+    cpu_extra_time decimal,
+    wall_time_limit decimal,
+    memory_limit decimal,
+    stack_limit decimal,
+    compile_output text,
+    exit_code int,
+    exit_signal int,
+    compiler_options text,
+    command_line_arguments text,
+    additional_files bytea
+);*/

@@ -1,27 +1,80 @@
 import React, { useState } from 'react';
 import EditorFooter from './EditorFooter';
 import Split from "react-split";
-import { Editor } from '@monaco-editor/react';
+import { toast } from "react-toastify";
+import { Editor, OnChange } from '@monaco-editor/react';
 import { Problem } from '@/app/types/problem';
+import LanguagesDropdown from './LanguagesDropdown';
+import { languageOptions } from '@/app/constants/languages';
+import axios from "axios";
 
 type PlaygroundProps = {
     problem: Problem
 };
 
 const Playground: React.FC<PlaygroundProps> = ({ problem }) => {
-
+    const [value, setValue] = useState("");
     const [activeTestCaseId, setActiveTestCaseId] = useState<number>(0);
+    const [language, setLanguage] = useState(languageOptions[0]);
 
+    const handleEditorChange = (value: any) => {
+        setValue(value);
+    };
+
+    const onSelectChange = (sl: any) => {
+        setLanguage(sl);
+    };
+
+    const handleSubmit = async () => {
+        const formData = {
+            language_id: language.id,
+            source_code: btoa(value),
+          };
+          const options = {
+            method: "POST",
+            url: "http://localhost:8080/submit",
+            params: {fields: "*" },
+            headers: {
+              "content-type": "application/json",
+              "Content-Type": "application/json",
+            },
+            data: formData,
+          };
+      
+          axios
+            .request(options)
+            .then(function (response) {
+              console.log("res.data", response.data);
+              //const token = response.data.token;
+            })
+            .catch((err) => {
+              let error = err.response ? err.response.data : err;
+              // get error status
+              let status = err.response.status;
+              console.log("status", status);
+              if (status === 429) {
+                console.log("too many requests", status);
+              }
+              console.log("catch block...", error);
+            });
+	};
 
     return (
         <>
             <div className='flex flex-col bg-dark-layer-1 relative overflow-x-hidden'>
                 <Split className='h-[calc(100vh-94px)]' direction='vertical' sizes={[60, 40]} minSize={60}>
                     <div className='w-full overflow-hidden'>
-                        <Editor height="90vh" theme='light'
+                        <div className="px-4 py-2">
+                        <LanguagesDropdown onSelectChange={onSelectChange} />
+                        </div>
+                        <Editor
+                            height="90vh"
+                            theme='light'
                             defaultLanguage="typescript"
-                            defaultValue={"function twoSum(nums: number[], target: number): number[] {\n    const m = new Map<number, number>();\n\n    for (let i = 0; i < nums.length; i++) {\n        const n = nums[i];\n        const diff = target - n;\n        if (m.has(diff)) return [m.get(diff)!, i];\n        else m.set(n, i);\n    }\n};"} />;
-
+                            defaultValue={"function twoSum(nums: number[], target: number): number[] {\n    const m = new Map<number, number>();\n\n    for (let i = 0; i < nums.length; i++) {\n        const n = nums[i];\n        const diff = target - n;\n        if (m.has(diff)) return [m.get(diff)!, i];\n        else m.set(n, i);\n    }\n};"}
+                            value={value}
+                            onChange={handleEditorChange}
+                        />;
                     </div>
                     <div className='w-full px-5 overflow-auto' >
                         {/* testcase heading */}
@@ -64,7 +117,7 @@ const Playground: React.FC<PlaygroundProps> = ({ problem }) => {
                         </div>
                     </div>
                 </Split>
-                <EditorFooter />
+                <EditorFooter handleSubmit={handleSubmit}/>
             </div>
         </>
     )

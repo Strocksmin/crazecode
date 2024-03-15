@@ -7,7 +7,6 @@ import { Icon, Label } from 'semantic-ui-react'
 import "semantic-ui-css/components/label.min.css"
 import "semantic-ui-css/components/icon.min.css"
 
-
 type ProblemsTableProps = {
 
 };
