@@ -2,10 +2,12 @@ TRUNCATE TABLE problem RESTART IDENTITY CASCADE;
 TRUNCATE TABLE examples RESTART IDENTITY CASCADE;
 TRUNCATE TABLE problemDescription RESTART IDENTITY CASCADE;
 TRUNCATE TABLE problem_tags RESTART IDENTITY CASCADE;
+TRUNCATE TABLE problem_tests RESTART IDENTITY CASCADE;
 DROP TABLE problem;
 DROP TABLE problemdescription;
 DROP TABLE examples;
 DROP TABLE problem_tags;
+DROP TABLE problem_tests;
 
 CREATE TABLE problemDescription
 (
@@ -37,6 +39,13 @@ CREATE TABLE problem (
 CREATE TABLE problem_tags (
     problem_id int REFERENCES problem(problem_id) not null,
     tag varchar(20)
+);
+
+CREATE TABLE problem_tests (
+    test_id SERIAL PRIMARY KEY,
+    problem_id int REFERENCES problem(problem_id) not null,
+    expected_input text,
+    expected_output text
 );
 
 

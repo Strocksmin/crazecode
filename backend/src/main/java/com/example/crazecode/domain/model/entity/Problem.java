@@ -37,4 +37,7 @@ public class Problem {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "description", referencedColumnName = "description_id")
     private ProblemDescription problemDescription;
+
+    @OneToMany(mappedBy = "problem")
+    private List<Test> tests;
 }

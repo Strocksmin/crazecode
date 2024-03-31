@@ -19,13 +19,12 @@ import java.util.stream.Collectors;
 @RestController
 public class ProblemSetController {
     private final ProblemServiceImpl problemService;
-    private final ProblemDaoImpl problemDao;
+
     private final ProblemMapper problemMapper;
 
     @Autowired
-    public ProblemSetController(ProblemServiceImpl problemService, ProblemDaoImpl problemDao, ProblemMapper problemMapper) {
+    public ProblemSetController(ProblemServiceImpl problemService, ProblemMapper problemMapper) {
         this.problemService = problemService;
-        this.problemDao = problemDao;
         this.problemMapper = problemMapper;
     }
     @GetMapping()

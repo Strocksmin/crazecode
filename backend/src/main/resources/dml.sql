@@ -27,6 +27,10 @@ INSERT INTO problemdescription (description_id, number, title, problemstatement,
 INSERT INTO problem (title, complexity, description) VALUES ('Two-sum', 'Easy', 1);
 INSERT INTO problem_tags (problem_id, tag) VALUES (1, 'Array');
 INSERT INTO problem_tags (problem_id, tag) VALUES (1, 'Hashmap');
+INSERT INTO problem_tests (problem_id, expected_input, expected_output) VALUES (1, 'console.log(twoSum([2,7,11,15], 9))', '[ 0, 1 ]');
+INSERT INTO problem_tests (problem_id, expected_input, expected_output) VALUES (1, 'console.log(twoSum([2,7,11,15], 13))', '[ 0, 2 ]');
+INSERT INTO problem_tests (problem_id, expected_input, expected_output) VALUES (1, 'console.log(twoSum([4,6,1,2], 3))', '[ 2, 3 ]');
+
 
 
 ----- #2
