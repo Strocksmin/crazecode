@@ -1,23 +1,19 @@
 package com.example.crazecode.config;
 
 import lombok.extern.slf4j.Slf4j;
-
 import org.reactivestreams.Publisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.client.reactive.ClientHttpRequestDecorator;
-import org.springframework.http.client.reactive.JettyClientHttpConnector;
 import org.springframework.web.reactive.function.client.ClientRequest;
 import org.springframework.web.reactive.function.client.ClientResponse;
-import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import reactor.core.publisher.Mono;
 
-import java.net.URI;
 import java.nio.charset.StandardCharsets;
 
 @Slf4j
@@ -36,14 +32,14 @@ public class WebConfig {
 
     @Bean
     public WebClient apiClient() {
-        return WebClient.builder().filter((request, next) -> {
+        return WebClient.builder()/*.filter((request, next) -> {
             log.error("DOWNSTREAM REQUEST: METHOD {}, URI: {}, HEADERS: {}",
                     request.method(), request.url(), request.headers());
             return next
                     .exchange(interceptBody(request))
                     .doOnNext(this::logResponse)
                     .map(this::interceptBody);
-        }).baseUrl("http://localhost:2358").build();
+        })*/.baseUrl("http://localhost:2358").build();
         /*return WebClient.create("http://localhost:2358");*/
     }
     private ClientRequest interceptBody(ClientRequest request) {

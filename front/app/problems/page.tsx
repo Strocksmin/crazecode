@@ -10,13 +10,13 @@ type ProblemsPageProps = {
 const ProblemsPage: React.FC<ProblemsPageProps> = () => {
 
     return (
-        <>
+        <div className='problem-body'>
             <Navbar></Navbar>
             <main>
                 <ProblemsTable />
             </main>
             <Footer />
-        </>
+        </div>
     )
 }
 export default ProblemsPage;

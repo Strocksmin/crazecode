@@ -71,10 +71,9 @@ const ProblemPage:React.FC<ProblemPageProps> = ({ params }: { params: { pid: num
     /*let problemDescription = getProblem(params.pid);*/
     return (
         <>
-        <Navbar></Navbar>
-        <main>
+        <div className='playground-body'>
         <Workspace problem={problemDescription}></Workspace>
-        </main>
+        </div>
         </>
     )
 }

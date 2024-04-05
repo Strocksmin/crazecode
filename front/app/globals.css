@@ -51,6 +51,13 @@ h1 {
 
 body {
     display: flex;
+    flex-direction: row;
+    height: 100vh;
+    flex: 1 0 auto;
+}
+
+.problem-body {
+    display: flex;
     flex-direction: column;
     height: 100vh;
     flex: 1 0 auto;
@@ -556,6 +563,8 @@ main {
 .split {
     display: flex;
     flex-direction: row;
+    margin: .5em;
+    margin-top:1em;
 }
 
 .gutter {
@@ -575,13 +584,15 @@ main {
 }
 
 .example-card pre {
-    background-color: hsl(0, 0%, 85%);
+    background-color: #f4f4f4;
     border-radius: .5rem;
     font-size: .98rem;
     line-height: 1.25rem;
     margin-bottom: 1rem;
     margin-top: 1rem;
     padding: 1rem;
+
+    
 }
 
 .example-card pre,
@@ -611,12 +622,18 @@ code {
 }
 
 code {
+    background-color: #000a2008;
+    border-color: #0000000d;
     border-radius: 5px;
     border-width: 1px;
+    color: #262626bf;
+    font-family: Menlo, sans-serif;
     font-size: .75rem;
     line-height: 1rem;
     padding: .125rem;
-    letter-spacing: 1px;
-    background-color: rgba(0, 0, 0, 0.1);
-    border-color: rgba(0, 0, 0, 0.15);
+    white-space: pre-wrap;
+}
+
+.playground-body {
+    background-color: #eee;
 }

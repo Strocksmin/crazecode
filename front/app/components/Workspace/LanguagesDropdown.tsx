@@ -12,7 +12,7 @@ const LanguagesDropdown:React.FC<LanguagesDropdownProps> = (props) => {
     } = props;
 
     return  (
-        <Select
+        <Select className='text-[0.9rem] w-[250px]'
           placeholder={`Filter By Category`}
           options={languageOptions}
           defaultValue={languageOptions[0]}

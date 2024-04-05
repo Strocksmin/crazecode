@@ -25,47 +25,44 @@ const Playground: React.FC<PlaygroundProps> = ({ problem }) => {
         setLanguage(sl);
     };
 
+    type SubmitUserCodeResponse = {
+        language_id: number;
+        source_code: string;
+        problem_id: number
+      };
+
     const handleSubmit = async () => {
-        const formData = {
-            language_id: language.id,
-            source_code: btoa(value),
-          };
-          const options = {
-            method: "POST",
-            url: "http://localhost:8080/submit",
-            params: {fields: "*" },
+    try {
+        const { data, status } = await axios.post<SubmitUserCodeResponse>(
+            'http://localhost:8080/solution',
+            { language_id: language.id, description: btoa(value), problem_id: problem.id},
+            {
             headers: {
-              "content-type": "application/json",
-              "Content-Type": "application/json",
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
             },
-            data: formData,
-          };
-      
-          axios
-            .request(options)
-            .then(function (response) {
-              console.log("res.data", response.data);
-              //const token = response.data.token;
-            })
-            .catch((err) => {
-              let error = err.response ? err.response.data : err;
-              // get error status
-              let status = err.response.status;
-              console.log("status", status);
-              if (status === 429) {
-                console.log("too many requests", status);
-              }
-              console.log("catch block...", error);
-            });
-	};
+        },
+        );
+        console.log(data);
+    return data;
+    } catch (error) {
+    if (axios.isAxiosError(error)) {
+        console.log('error message: ', error.message);
+        return error.message;
+    } else {
+        console.log('unexpected error: ', error);
+        return 'An unexpected error occurred';
+    }
+}
+};
 
     return (
         <>
-            <div className='flex flex-col bg-dark-layer-1 relative overflow-x-hidden'>
+            <div className='flex flex-col bg-white-layer-1 relative overflow-x-hidden'>
                 <Split className='h-[calc(100vh-94px)]' direction='vertical' sizes={[60, 40]} minSize={60}>
                     <div className='w-full overflow-hidden'>
-                        <div className="px-4 py-2">
-                        <LanguagesDropdown onSelectChange={onSelectChange} />
+                        <div className="px-4 py-2 border-b bg-[white]">
+                        <LanguagesDropdown onSelectChange={onSelectChange}/>
                         </div>
                         <Editor
                             height="90vh"
@@ -76,7 +73,7 @@ const Playground: React.FC<PlaygroundProps> = ({ problem }) => {
                             onChange={handleEditorChange}
                         />;
                     </div>
-                    <div className='w-full px-5 overflow-auto' >
+                    <div className='w-full px-5 overflow-auto bg-[white]' >
                         {/* testcase heading */}
                         <div className='flex h-10 items-center space-x-6'>
                             <div className='relative flex h-full flex-col justify-center cursor-pointer'>
