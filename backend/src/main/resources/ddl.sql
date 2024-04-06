@@ -48,13 +48,15 @@ CREATE TABLE problem_tests (
     expected_output text
 );
 
+DROP TABLE users CASCADE;
 
-/*CREATE TABLE users
+CREATE TABLE users
 (
     user_id     SERIAL PRIMARY KEY,
-    login               varchar(64),
-    password    varchar(64),
-    email          varchar(64)
+    login       varchar(100) UNIQUE NOT NULL,
+    password    varchar,
+    role        varchar(64),
+    email       varchar UNIQUE
 );
 
 CREATE TABLE languages
@@ -71,7 +73,7 @@ CREATE TABLE submissions
     submission_id SERIAL PRIMARY KEY,
     source_code text,
     language_id REFERENCES languages(language_id),
-    user_id REFERENCES users(user_id,)
+    user_id REFERENCES users(user_id)
     stdin text,
     expected_output text,
     stdout text,
@@ -94,4 +96,4 @@ CREATE TABLE submissions
     compiler_options text,
     command_line_arguments text,
     additional_files bytea
-);*/
+);

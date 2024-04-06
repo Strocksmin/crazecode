@@ -5,6 +5,8 @@ import org.hibernate.collection.spi.PersistentCollection;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -17,7 +19,7 @@ import java.util.Objects;
 
 @EnableTransactionManagement
 @Configuration
-public class DataConfig {
+public class AppConfig {
 
     @Bean
     public ModelMapper modelMapper() {
@@ -31,7 +33,12 @@ public class DataConfig {
         });
         return modelMapper;
     }
-
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
+        configurer.setLocation(new ClassPathResource("configuration/config.properties"));
+        return configurer;
+    }
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
