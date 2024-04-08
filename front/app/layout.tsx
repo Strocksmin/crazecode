@@ -4,8 +4,6 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 config.autoAddCss = false;
 import './globals.css'
-import { Providers } from './providers';
-
 
 const montserrat = Montserrat({ subsets: ['cyrillic'] })
 
@@ -22,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <Providers>{children}</Providers>
+        {children}
         </body>
     </html>
   )

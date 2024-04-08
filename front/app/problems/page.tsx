@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from '../components/Navbar/Navbar';
-import ProblemsTable from '../components/Problems/ProblemsTable';
-import Footer from '../components/Footer/Footer';
+import TableB from '../test/TableB';
+import NavB from '../test/NavB';
+import Foot from '../test/foot';
 
 type ProblemsPageProps = {
 
@@ -10,12 +10,12 @@ type ProblemsPageProps = {
 const ProblemsPage: React.FC<ProblemsPageProps> = () => {
 
     return (
-        <div className='problem-body'>
-            <Navbar></Navbar>
-            <main>
-                <ProblemsTable />
-            </main>
-            <Footer />
+        <div className='flex flex-col'>
+            <NavB></NavB>
+            <TableB></TableB>
+            <div className='w-full h-20 left-0 bottom-0'>
+                <Foot></Foot>
+            </div>
         </div>
     )
 }

@@ -3,6 +3,7 @@ import { DOTS, usePagination } from './usePagination';
 import classnames from 'classnames';
 import './pagination.css';
 
+
 interface PaginationProps {
   onPageChange: (pageNumber: number) => void;
   totalCount: number;
@@ -44,11 +45,11 @@ const Pagination: FC<PaginationProps> = (props) => {
   let lastPage = paginationRange[paginationRange.length - 1];
   return (
     <ul
-      className={classnames('pagination-container',)}
+      className='pagination-container'
     >
       <li
         className={classnames('pagination-item', {
-          disabled: currentPage === 1
+          "disabled": currentPage === 1
         })}
         onClick={onPrevious}
       >
