@@ -9,7 +9,8 @@ import java.io.Serializable;
 @Setter
 @Getter
 public class SolutionDto implements Serializable {
-    private int language_id;
+    private Long user_id;
+    private Long language_id;
     private String source_code;
     private Long problem_id;
 

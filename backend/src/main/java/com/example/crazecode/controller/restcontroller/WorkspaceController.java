@@ -4,8 +4,8 @@ import com.example.crazecode.dao.impl.ProblemDescriptionDaoImpl;
 import com.example.crazecode.domain.dto.*;
 import com.example.crazecode.domain.model.entity.ProblemDescription;
 import com.example.crazecode.domain.model.entity.Test;
-import com.example.crazecode.service.impl.ProblemDescriptionServiceImpl;
-import com.example.crazecode.service.impl.ProblemServiceImpl;
+import com.example.crazecode.domain.model.entity.UserSubmission;
+import com.example.crazecode.service.impl.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,7 +17,12 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.time.LocalTime.now;
 
 @Slf4j
 @RestController
@@ -27,21 +32,38 @@ public class WorkspaceController {
     private final ProblemDescriptionServiceImpl problemDescriptionService;
     private final ProblemServiceImpl problemService;
     private final WebClient apiClient;
+    private final UserSubmissionServiceImpl userSubmissionService;
+    private final UserServiceImpl userService;
+    private final LanguageServiceImpl languageService;
 
     @Autowired
     public WorkspaceController(ProblemDescriptionServiceImpl problemDescriptionService,
                                ProblemDescriptionDaoImpl problemDescriptionDao,
                                WebClient apiClient,
-                               ProblemServiceImpl problemService) {
+                               ProblemServiceImpl problemService,
+                               UserSubmissionServiceImpl userSubmissionService,
+                               UserServiceImpl userService,
+                               LanguageServiceImpl languageService) {
+        this.languageService = languageService;
         this.problemDescriptionDao = problemDescriptionDao;
         this.problemDescriptionService = problemDescriptionService;
         this.apiClient = apiClient;
         this.problemService = problemService;
+        this.userSubmissionService = userSubmissionService;
+        this.userService = userService;
     }
 
     @GetMapping(value = "/problem/{id}")
     public ProblemDescription getProblemDescriptionById(@PathVariable("id") Long id) {
         return problemDescriptionService.getById(id);
+    }
+
+    @GetMapping(value = "/submissions/user/{user_id}/problem/{problem_id}")
+    public List<UserSubmission> getUserSubmissionsById(@PathVariable Long user_id,
+                                                       @PathVariable Long problem_id) {
+        return userService.getById(user_id).getSubmissions().stream()
+                .filter(userSubmission -> Objects.equals(userSubmission.getProblem_id(), problem_id))
+                .collect(Collectors.toList());
     }
 
     @PostMapping(value = "/submit")
@@ -68,7 +90,7 @@ public class WorkspaceController {
     @PostMapping(value = "/solution")
     public FrontendResponseDto solutionFromUser(@RequestBody SolutionDto solutionDto) {
         List<SubmissionDto> submissions = new ArrayList<>();
-        int languageId = solutionDto.getLanguage_id();
+        Long languageId = solutionDto.getLanguage_id();
         String sourceCode = solutionDto.getSource_code() + "\n";
         int lengthOfTests = problemService.getById(solutionDto.getProblem_id()).getTests().size();
         List<Test> tests = problemService.getById(solutionDto.getProblem_id()).getTests();
@@ -122,19 +144,32 @@ public class WorkspaceController {
             if (id != 3 && id > 2) {
                 responseDto.setDescription(dto.getCompile_output());
                 for (TokenStatusDto dto1 : tokenStatusDtos) {
-                    if (dto1.getToken().equals(dto.getToken()))
+                    if (dto1.getToken().equals(dto.getToken())) {
                         responseDto.setTest_id(dto1.getTestId());
+                        responseDto.setTime(dto.getTime());
+                        responseDto.setMemory(dto.getMemory());
+                    }
                 }
             }
         }
+        log.info("DESCRIPTION DTO: {}", responseDto.getDescription());
+        UserSubmission userSubmission = new UserSubmission(
+                solutionDto.getProblem_id(),
+                userService.getById(solutionDto.getUser_id()),
+                LocalDateTime.now(),
+                languageService.getById(solutionDto.getLanguage_id()).getName(),
+                responseDto.getDescription() == "All tests passed!" ? "Success" : "Failure",
+                responseDto.getTime(),
+                responseDto.getMemory());
 
+        userSubmissionService.create(userSubmission);
         return responseDto;
     }
 
     @PostMapping(value = "/solutionTest")
     public BatchReponseDto solutionFromUserTest(@RequestBody SolutionDto solutionDto) {
         List<SubmissionDto> submissions = new ArrayList<>();
-        int languageId = solutionDto.getLanguage_id();
+        Long languageId = solutionDto.getLanguage_id();
         String sourceCode = solutionDto.getSource_code() + "\n";
         int lengthOfTests = problemService.getById(solutionDto.getProblem_id()).getTests().size();
         List<Test> tests = problemService.getById(solutionDto.getProblem_id()).getTests();

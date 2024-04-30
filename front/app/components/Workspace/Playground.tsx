@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react';
 import EditorFooter from './EditorFooter';
 import Split from "react-split";
@@ -6,6 +7,7 @@ import { Editor, OnChange } from '@monaco-editor/react';
 import { Problem } from '@/app/types/problem';
 import LanguagesDropdown from './LanguagesDropdown';
 import { languageOptions } from '@/app/constants/languages';
+import { useRouter } from 'next/navigation';
 import axios from "axios";
 
 type PlaygroundProps = {
@@ -13,6 +15,8 @@ type PlaygroundProps = {
 };
 
 const Playground: React.FC<PlaygroundProps> = ({ problem }) => {
+    const router = useRouter();
+
     const [value, setValue] = useState("");
     const [activeTestCaseId, setActiveTestCaseId] = useState<number>(0);
     const [language, setLanguage] = useState(languageOptions[0]);
@@ -26,35 +30,50 @@ const Playground: React.FC<PlaygroundProps> = ({ problem }) => {
     };
 
     type SubmitUserCodeResponse = {
-        language_id: number;
-        source_code: string;
-        problem_id: number
-      };
+        test_id: number;
+        description: string;
+        memory: string;
+        time: string;
+    };
 
     const handleSubmit = async () => {
-    try {
-        const { data, status } = await axios.post<SubmitUserCodeResponse>(
-            'http://localhost:8080/solution',
-            { language_id: language.id, description: btoa(value), problem_id: problem.id},
-            {
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            },
-        },
-        );
-        console.log(data);
-    return data;
-    } catch (error) {
-    if (axios.isAxiosError(error)) {
-        console.log('error message: ', error.message);
-        return error.message;
-    } else {
-        console.log('unexpected error: ', error);
-        return 'An unexpected error occurred';
-    }
-}
-};
+        try {
+            if (localStorage.getItem("user_id") == null) {
+                console.log("Пользователь не авторизован");
+                router.push("/auth")
+            }
+            const { data, status } = await axios.post<SubmitUserCodeResponse>(
+                'http://localhost:8080/solution',
+                {
+                    user_id: Number(localStorage.getItem("user_id")),
+                    language_id: language.id,
+                    source_code: value,
+                    problem_id: problem.id
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                    },
+                },
+            );
+            router.refresh();
+            console.log(data);
+            return data;
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.log('error message: ', error.message);
+                console.log(localStorage.getItem("user_id"));
+                console.log(language.id);
+                console.log(value);
+                console.log(problem.id);
+                return error.message;
+            } else {
+                console.log('unexpected error: ', error);
+                return 'An unexpected error occurred';
+            }
+        }
+    };
 
     return (
         <>
@@ -62,7 +81,7 @@ const Playground: React.FC<PlaygroundProps> = ({ problem }) => {
                 <Split className='h-[calc(100vh-94px)]' direction='vertical' sizes={[60, 40]} minSize={60}>
                     <div className='w-full overflow-hidden'>
                         <div className="px-4 py-2 border-b bg-[white]">
-                        <LanguagesDropdown onSelectChange={onSelectChange}/>
+                            <LanguagesDropdown onSelectChange={onSelectChange} />
                         </div>
                         <Editor
                             height="90vh"
@@ -114,7 +133,7 @@ const Playground: React.FC<PlaygroundProps> = ({ problem }) => {
                         </div>
                     </div>
                 </Split>
-                <EditorFooter handleSubmit={handleSubmit}/>
+                <EditorFooter handleSubmit={handleSubmit} />
             </div>
         </>
     )

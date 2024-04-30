@@ -4,6 +4,8 @@ import com.example.crazecode.domain.model.enumEntity.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Builder
 @Getter
 @Setter
@@ -32,4 +34,7 @@ public class User {
         this.role = role;
         this.email = email;
     }
+
+    @OneToMany(mappedBy = "user")
+    private List<UserSubmission> submissions;
 }

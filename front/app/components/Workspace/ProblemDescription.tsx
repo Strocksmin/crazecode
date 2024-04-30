@@ -1,6 +1,7 @@
 import { Problem } from '@/app/types/problem';
 import React, { useState } from 'react';
 import Submission from './Submission';
+import SubmissionsTable from './SubmissionsTable';
 
 type ProblemDescriptionProps = {
     problem: {
@@ -183,8 +184,7 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem }) => {
                         {/*Content 3*/}
                         <div className='w-full'>
                             <div className='flex space-x-4'>
-                                
-                                <Submission></Submission>
+                                <SubmissionsTable problem_id={problem.id + 1}/>
                             </div>
                         </div>
                     </div>

@@ -50,10 +50,10 @@ h1 {
 }
 
 body {
-    display: flex;
-    flex-direction: row;
+    /*display: flex;
+    flex-direction: row;*/
     height: 100vh;
-    flex: 1 0 auto;
+    /*flex: 1 0 auto;*/
 }
 
 .problem-body {
